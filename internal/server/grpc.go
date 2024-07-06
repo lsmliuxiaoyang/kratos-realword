@@ -1,7 +1,7 @@
 package server
 
 import (
-	v1 "realword/api/helloworld/v1"
+	v1 "realword/api/realword/v1"
 	"realword/internal/conf"
 	"realword/internal/service"
 
