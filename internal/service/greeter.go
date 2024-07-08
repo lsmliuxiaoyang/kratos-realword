@@ -2,26 +2,14 @@ package service
 
 import (
 	"context"
-
-	v1 "realword/api/realword/v1"
-	"realword/internal/biz"
+	v1 "kratos-realwd/api/realwd/v1"
+	"kratos-realwd/internal/biz"
 )
 
-// 一个微服务有一个service
-type GreeterService struct {
-	v1.UnimplementedGreeterServer
-
-	uc *biz.GreeterUsecase
-}
-
-func NewGreeterService(uc *biz.GreeterUsecase) *GreeterService {
-	return &GreeterService{uc: uc}
-}
-
-func (s *GreeterService) SayHello(ctx context.Context, in *v1.HelloRequest) (*v1.HelloReply, error) {
-	g, err := s.uc.CreateGreeter(ctx, &biz.Greeter{Hello: in.Name})
-	if err != nil {
-		return nil, err
-	}
-	return &v1.HelloReply{Message: "Hello " + g.Hello}, nil
+// SayHello implements helloworld.RealwdServer.
+func (r *RealwdService) SayHello(ctx context.Context, req *v1.HelloRequest) (*v1.HelloReply, error) {
+	g, err := r.uc.CreateRealwd(ctx, &biz.Realwd{Hello: req.Name})
+	return &v1.HelloReply{
+		Message: "Hello " + g.Hello,
+	}, err
 }

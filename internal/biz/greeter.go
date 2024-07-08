@@ -3,7 +3,7 @@ package biz
 import (
 	"context"
 
-	v1 "realword/api/realword/v1"
+	v1 "kratos-realwd/api/realwd/v1"
 
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/log"
@@ -14,33 +14,33 @@ var (
 	ErrUserNotFound = errors.NotFound(v1.ErrorReason_USER_NOT_FOUND.String(), "user not found")
 )
 
-// Greeter is a Greeter model.
-type Greeter struct {
+// Realwd is a Realwd model.
+type Realwd struct {
 	Hello string
 }
 
-// GreeterRepo is a Greater repo.
-type GreeterRepo interface {
-	Save(context.Context, *Greeter) (*Greeter, error)
-	Update(context.Context, *Greeter) (*Greeter, error)
-	FindByID(context.Context, int64) (*Greeter, error)
-	ListByHello(context.Context, string) ([]*Greeter, error)
-	ListAll(context.Context) ([]*Greeter, error)
+// RealwdRepo is a Greater repo.
+type RealwdRepo interface {
+	Save(context.Context, *Realwd) (*Realwd, error)
+	Update(context.Context, *Realwd) (*Realwd, error)
+	FindByID(context.Context, int64) (*Realwd, error)
+	ListByHello(context.Context, string) ([]*Realwd, error)
+	ListAll(context.Context) ([]*Realwd, error)
 }
 
-// GreeterUsecase is a Greeter usecase.
-type GreeterUsecase struct {
-	repo GreeterRepo
+// RealwdUsecase is a Realwd usecase.
+type RealwdUsecase struct {
+	repo RealwdRepo
 	log  *log.Helper
 }
 
-// NewGreeterUsecase new a Greeter usecase.
-func NewGreeterUsecase(repo GreeterRepo, logger log.Logger) *GreeterUsecase {
-	return &GreeterUsecase{repo: repo, log: log.NewHelper(logger)}
+// NewRealwdUsecase new a Realwd usecase.
+func NewRealwdUsecase(repo RealwdRepo, logger log.Logger) *RealwdUsecase {
+	return &RealwdUsecase{repo: repo, log: log.NewHelper(logger)}
 }
 
-// CreateGreeter creates a Greeter, and returns the new Greeter.
-func (uc *GreeterUsecase) CreateGreeter(ctx context.Context, g *Greeter) (*Greeter, error) {
-	uc.log.WithContext(ctx).Infof("CreateGreeter: %v", g.Hello)
+// CreateRealwd creates a Realwd, and returns the new Realwd.
+func (uc *RealwdUsecase) CreateRealwd(ctx context.Context, g *Realwd) (*Realwd, error) {
+	uc.log.WithContext(ctx).Infof("CreateRealwd: %v", g.Hello)
 	return uc.repo.Save(ctx, g)
 }

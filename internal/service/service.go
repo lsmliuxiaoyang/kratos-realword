@@ -1,6 +1,24 @@
 package service
 
-import "github.com/google/wire"
+import (
+	"github.com/google/wire"
+	v1 "kratos-realwd/api/realwd/v1"
+	"kratos-realwd/internal/biz"
+)
 
 // ProviderSet is service providers.
-var ProviderSet = wire.NewSet(NewGreeterService)
+var ServiceProviderSet = wire.NewSet(
+	NewRealwdService,
+)
+
+// RealwdService is a Realwd service.
+type RealwdService struct {
+	v1.UnimplementedReadwdServer
+
+	uc *biz.RealwdUsecase
+}
+
+// NewRealwdService new a Realwd service.
+func NewRealwdService(uc *biz.RealwdUsecase) *RealwdService {
+	return &RealwdService{uc: uc}
+}

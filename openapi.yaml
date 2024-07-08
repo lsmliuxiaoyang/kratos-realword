@@ -3,16 +3,14 @@
 
 openapi: 3.0.3
 info:
-    title: Greeter API
-    description: The greeting service definition.
+    title: Readwd API
     version: 0.0.1
 paths:
     /helloworld/{name}:
         get:
             tags:
-                - Greeter
-            description: Sends a greeting
-            operationId: Greeter_SayHello
+                - Readwd
+            operationId: Readwd_SayHello
             parameters:
                 - name: name
                   in: path
@@ -25,14 +23,43 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.HelloReply'
+                                $ref: '#/components/schemas/readwd.v1.HelloReply'
+    /login:
+        post:
+            tags:
+                - Readwd
+            operationId: Readwd_Login
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/readwd.v1.LoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/readwd.v1.LoginReply'
 components:
     schemas:
-        helloworld.v1.HelloReply:
+        readwd.v1.HelloReply:
             type: object
             properties:
                 message:
                     type: string
-            description: The response message containing the greetings
+        readwd.v1.LoginReply:
+            type: object
+            properties:
+                token:
+                    type: string
+        readwd.v1.LoginRequest:
+            type: object
+            properties:
+                username:
+                    type: string
+                password:
+                    type: string
 tags:
-    - name: Greeter
+    - name: Readwd
