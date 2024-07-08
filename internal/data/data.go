@@ -11,7 +11,7 @@ import (
 )
 
 // ProviderSet is data providers. wire 需扫描的东西
-var ProviderSet = wire.NewSet(NewData, NewDb, NewRealwdRepo)
+var ProviderSet = wire.NewSet(NewData, NewDb, NewUserRepo)
 
 // Data .
 type Data struct {
@@ -27,7 +27,7 @@ func NewData(c *conf.Data, logger log.Logger, db *gorm.DB) (*Data, func(), error
 	return &Data{Db: db}, cleanup, nil
 }
 
-// 连接数据库
+// NewDb 连接数据库
 func NewDb(c *conf.Data) *gorm.DB {
 	db, err := gorm.Open(mysql.Open(c.Database.Source), &gorm.Config{})
 	fmt.Println(c.Database.Source)
